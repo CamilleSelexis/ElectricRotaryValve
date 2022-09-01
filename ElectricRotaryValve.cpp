@@ -29,10 +29,10 @@ ERV::ERV(uint8_t home_pin, uint8_t port_pin, uint8_t CS_pin, uint8_t TGT_pin) : 
 
 bool ERV::init_ERV(){
 	TMC4361A::begin();
-	TMC4361A::setCurrentScale(8);//Set current Scale for a NEMA 17 motor
+	TMC4361A::setCurrentScale(10);//Set current Scale for a NEMA 17 motor
 	TMC4361A::setVMAX(45,2);//Set speed to 45 RPM
-	TMC4361A::setAMAX(0x000FFF);//Set AMAX to a lower value
-
+	TMC4361A::setAMAX(0x00FFFF);//Set AMAX to a lower value
+	delay(100);
 	TMC4361A::setTargetRelative(51200);//1 full turn at 256 usteps
 	while(!TMC4361A::isTargetReached()){
 		if(!digitalRead(_home)){
